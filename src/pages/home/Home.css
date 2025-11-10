@@ -13,6 +13,9 @@
 }
 .blogPost {
   background-color: #393e46;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-all;
   color: #eeeeee;
   padding: 20px;
   border-radius: 20px;

@@ -1,31 +1,31 @@
 import { useEffect, useMemo, useState, useContext } from "react";
+import { PostContext } from "../../providers/PostProvider.jsx";
 import Welcome from "./components/Welcome";
 import Blogs from "./components/Blogs";
-import { CurrentUserContext } from "../../providers/CurrentUserProvider";
 import "./Home.css";
 
 export default function Home() {
-  const [blogs, setBlogs] = useState(null);
-  const [page, setPage] = useState(1);
+  const { posts, setPosts } = useContext(PostContext);
   const [search, setSearch] = useState("");
   const [searchTitle, setSearchTitle] = useState("");
   const [sort, setSort] = useState("");
-  const { currentUser, setCurrentuser } = useContext(CurrentUserContext);
 
   useEffect(() => {
     async function getData() {
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/posts"
-      );
-      const data = await response.json();
-      setBlogs(data);
+      if (!posts || posts.length === 0) {
+        const response = await fetch(
+          "https://jsonplaceholder.typicode.com/posts"
+        );
+        const data = await response.json();
+        setPosts(data);
+      }
     }
     getData();
-  }, [page]);
+  }, [posts, setPosts]);
 
   const filtered = useMemo(() => {
-    if (blogs) {
-      let result = [...blogs];
+    if (posts) {
+      let result = [...posts];
 
       if (search.trim()) {
         if (!isNaN(search)) {
@@ -50,7 +50,7 @@ export default function Home() {
 
       return result;
     }
-  }, [search, sort, searchTitle]);
+  }, [search, sort, searchTitle, posts]);
 
   return (
     <>
@@ -78,7 +78,7 @@ export default function Home() {
           </select>
         </div>
       </div>
-      <Blogs blogs={filtered ? filtered : blogs} />
+      <Blogs blogs={filtered ? filtered : posts} />
     </>
   );
 }
