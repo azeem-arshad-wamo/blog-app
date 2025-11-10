@@ -1,5 +1,5 @@
 import React, { Suspense, useContext } from "react";
-import { Routes, Route, NavLink, Link } from "react-router-dom";
+import { Routes, Route, NavLink, Link, useNavigate } from "react-router-dom";
 import { LoginContext } from "./LoginProvider.jsx";
 import { CurrentUserContext } from "./providers/CurrentUserProvider.jsx";
 import "./App.css";
@@ -11,8 +11,10 @@ const CreatePost = React.lazy(() =>
   import("./pages/createPost/CreatePost.jsx")
 );
 const SignUp = React.lazy(() => import("./pages/signup/SignUp.jsx"));
+const Dashboard = React.lazy(() => import("./pages/dashboard/Dashboard.jsx"));
 
 export default function App() {
+  const navigator = useNavigate();
   const { isLogged, setIsLogged } = useContext(LoginContext);
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
@@ -29,10 +31,15 @@ export default function App() {
         </div>
         <div id="rightNav">
           {isLogged ? (
-            <NavLink onClick={handleLogOut}>Log Out</NavLink>
+            <button id="logoutButton" onClick={handleLogOut}>
+              Log Out
+            </button>
           ) : (
-            <NavLink to="/login">Log In</NavLink>
+            <button id="logoutButton" onClick={() => navigator("/login")}>
+              Log In
+            </button>
           )}
+          <NavLink to="/dashboard">Dashboard</NavLink>
           <NavLink to="/create-post">Create a Post</NavLink>
         </div>
       </nav>
@@ -44,6 +51,7 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Suspense>
     </>
