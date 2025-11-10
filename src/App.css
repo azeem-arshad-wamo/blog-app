@@ -8,8 +8,9 @@ nav {
   display: flex;
   background-color: #393e46;
   font-size: 20px;
-  padding: 20px 20px;
+  padding: 10px 20px;
   justify-content: space-between;
+  align-items: center;
 }
 a {
   text-decoration: none;
@@ -17,6 +18,14 @@ a {
 }
 .active {
   background-color: #222831;
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+#rightNav {
+  display: flex;
+  gap: 20px;
+}
+#rightNav a {
   padding: 10px 15px;
   border-radius: 10px;
 }

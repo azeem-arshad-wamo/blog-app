@@ -1,6 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useContext } from "react";
 import Welcome from "./components/Welcome";
 import Blogs from "./components/Blogs";
+import { CurrentUserContext } from "../../providers/CurrentUserProvider";
 import "./Home.css";
 
 export default function Home() {
@@ -9,6 +10,7 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [searchTitle, setSearchTitle] = useState("");
   const [sort, setSort] = useState("");
+  const { currentUser, setCurrentuser } = useContext(CurrentUserContext);
 
   useEffect(() => {
     async function getData() {
