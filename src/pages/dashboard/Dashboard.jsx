@@ -1,12 +1,22 @@
 import { useContext } from "react";
-import { CommentsContext } from "../../providers/CommentsProvider.jsx";
+import { UserActivityContext } from "../../providers/UserActivityProvider";
+import Posts from "./components/Posts.jsx";
+import Comments from "./components/Comments.jsx";
+import "./Dashboard.css";
 
 export default function Dashboard() {
-  const { comments, setComments } = useContext(CommentsContext);
+  const { UserActivity, setUserActivity } = useContext(UserActivityContext);
 
   return (
     <>
-      <h1>Dashboard Page</h1>
+      <div id="dashboardContainer">
+        <div>
+          <Posts userPosts={UserActivity.posts} />
+        </div>
+        <div>
+          <Comments userComments={UserActivity.comments} />
+        </div>
+      </div>
     </>
   );
 }

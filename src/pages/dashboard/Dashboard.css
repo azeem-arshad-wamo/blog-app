@@ -1,0 +1,38 @@
+#dashboardContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 40px;
+}
+#dashboardContainer > div {
+  flex: 1;
+  display: flex;
+}
+#dashPostContainer,
+#dashCommentContainer {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 10px;
+  background-color: #eeeeee;
+  padding: 20px 40px;
+  color: black;
+  border-radius: 10px;
+}
+.dashPost,
+.dashComment {
+  background-color: #222831;
+  color: #eeeeee;
+  padding: 10px 30px;
+  border-radius: 10px;
+}
+#dashPostContainer > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+#dashCommentContainer > div:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

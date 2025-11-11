@@ -1,8 +1,9 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, Children } from "react";
 import { PostContext } from "../../providers/PostProvider";
 import { useFormik } from "formik";
 import { useParams } from "react-router-dom";
 import { LoginContext } from "../../LoginProvider";
+import { UserActivityContext } from "../../providers/UserActivityProvider";
 import { CurrentUserContext } from "../../providers/CurrentUserProvider";
 import * as Yup from "yup";
 import "./Post.css";
@@ -11,6 +12,7 @@ export default function Posts() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const { posts, setPosts } = useContext(PostContext);
+  const { UserActivity, setUserActivity } = useContext(UserActivityContext);
   const { isLogged, setIsLogged } = useContext(LoginContext);
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [Comments, setComments] = useState(null);
@@ -48,11 +50,10 @@ export default function Posts() {
       body: values.comment,
     };
 
-    console.log("Before Addition!");
-    console.log(updated);
+    UserActivity.comments.push(newEntry);
+    console.log(UserActivity);
+
     updated = [...updated, newEntry];
-    console.log("After Addition!");
-    console.log(updated);
     setComments(updated);
   }
 

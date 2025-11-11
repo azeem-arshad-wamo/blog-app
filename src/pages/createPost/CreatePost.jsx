@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CurrentUserContext } from "../../providers/CurrentUserProvider";
 import { PostContext } from "../../providers/PostProvider";
+import { UserActivityContext } from "../../providers/UserActivityProvider.jsx";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./CreatePost.css";
@@ -10,6 +11,7 @@ export default function CreatePost() {
   const navigator = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const { posts, setPosts } = useContext(PostContext);
+  const { UserActivity, setUserActivity } = useContext(UserActivityContext);
 
   const validationSchema = Yup.object({
     title: Yup.string()
@@ -40,6 +42,9 @@ export default function CreatePost() {
     newPosts = [...newPosts, { userId, id, title, body }];
     console.log(newPosts);
     setPosts(newPosts);
+    UserActivity.posts.push({ userId, id, title, body });
+    console.log("User Activity:");
+    console.log(UserActivity);
     navigator("/");
   }
 
