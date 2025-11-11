@@ -1,4 +1,8 @@
 export default function Posts({ userComments }) {
+  function handleClick(id) {
+    console.log(`Id: ${id}`);
+  }
+
   return (
     <>
       <div id="dashCommentContainer">
@@ -8,7 +12,11 @@ export default function Posts({ userComments }) {
         <div>
           {userComments && userComments.length > 0 ? (
             userComments.map((comment) => (
-              <div className="dashComment" key={comment.id}>
+              <div
+                onClick={() => handleClick(comment.id)}
+                className="dashComment"
+                key={comment.id}
+              >
                 <div>
                   <p>
                     <b>Post Id: </b>
