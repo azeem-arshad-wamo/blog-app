@@ -10,6 +10,9 @@
 #postDiv {
   width: 60%;
   overflow: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 #commentsDiv {
   width: 40%;
@@ -38,4 +41,34 @@
   background-color: #393e46;
   color: white;
   padding: 10px 20px;
+  border-radius: 20px;
+}
+#commentInput {
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: none;
+  font-size: 20px;
+  width: 100%;
+}
+#commentInputDiv {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+#commentSubmit {
+  background-color: #393e46;
+  color: white;
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+#commentSubmit:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+#commentSubmit:active {
+  transform: scale(0.95);
 }
