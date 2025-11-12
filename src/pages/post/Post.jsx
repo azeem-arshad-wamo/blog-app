@@ -8,7 +8,7 @@ import { CurrentUserContext } from "../../providers/CurrentUserProvider";
 import * as Yup from "yup";
 import "./Post.css";
 
-export default function Posts() {
+export default function Posts({}) {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const { posts, setPosts } = useContext(PostContext);
@@ -130,7 +130,7 @@ export default function Posts() {
                 <h1 id="postHeading">{post.title}</h1>
               </div>
               <div>
-                <p id="postDesc">Description: {post.body}</p>
+                <p id="postDesc">{post.body}</p>
               </div>
               <div id="subHeading">
                 <p>User ID: {post.userId}</p>

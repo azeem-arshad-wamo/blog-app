@@ -21,7 +21,7 @@ export default function Home() {
       }
     }
     getData();
-  }, [posts, setPosts]);
+  }, [setPosts]);
 
   const filtered = useMemo(() => {
     if (posts) {

@@ -25,6 +25,13 @@
   color: #eeeeee;
   padding: 10px 30px;
   border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.dashPost:hover,
+.dashComment:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 #dashPostContainer > div:last-child {
   display: flex;
@@ -35,4 +42,98 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+.iconDiv {
+  display: flex;
+  justify-content: flex-end;
+  padding: 5px;
+  gap: 20px;
+}
+.editIcon {
+  color: orange;
+  transition: transform 0.1s ease, opacity 0.1s ease, color 0.1s ease;
+}
+.deleteIcon {
+  color: red;
+  transition: transform 0.1s ease, opacity 0.1s ease, color 0.1s ease;
+}
+.editIcon:hover {
+  transform: scale(1.3);
+  opacity: 0.8;
+  color: rgb(199, 130, 3);
+}
+.deleteIcon:hover {
+  transform: scale(1.3);
+  opacity: 0.8;
+  color: rgb(190, 0, 0);
+}
+.commentEditDiv {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.commentEditInput {
+  background-color: #393e46;
+  border: none;
+  color: white;
+  font-size: 15px;
+  border-radius: 10px;
+  width: 550px;
+  padding: 10px 15px;
+}
+.commentEditButton {
+  background-color: #393e46;
+  border: none;
+  padding: 10px 15px;
+  color: #eeeeee;
+  margin-left: 10px;
+  font-size: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.commentEditButton:hover {
+  opacity: 0.8;
+}
+.commentEditButton:active {
+  opacity: 0.6;
+}
+.postEditDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding: 10px 0;
+}
+.postEditInput {
+  background-color: #393e46;
+  border: none;
+  color: #eeeeee;
+  font-size: 15px;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px 15px;
+  box-sizing: border-box;
+  resize: none;
+}
+.postEditDiv > div:last-child {
+  display: flex;
+  gap: 10px;
+}
+.postEditButton {
+  background-color: #393e46;
+  border: none;
+  padding: 10px 15px;
+  color: #eeeeee;
+  font-size: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+.postEditButton:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+.postEditButton:active {
+  opacity: 0.6;
 }

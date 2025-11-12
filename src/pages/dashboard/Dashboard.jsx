@@ -11,10 +11,16 @@ export default function Dashboard() {
     <>
       <div id="dashboardContainer">
         <div>
-          <Posts userPosts={UserActivity.posts} />
+          <Posts
+            userPosts={UserActivity.posts}
+            setUserActivity={setUserActivity}
+          />
         </div>
         <div>
-          <Comments userComments={UserActivity.comments} />
+          <Comments
+            userComments={UserActivity.comments}
+            setUserActivity={setUserActivity}
+          />
         </div>
       </div>
     </>
