@@ -1,4 +1,8 @@
 export default function Posts({ userPosts }) {
+  function handleClick(postId) {
+    console.log(`Post Id: ${postId}`);
+  }
+
   return (
     <>
       <div id="dashPostContainer">
@@ -8,7 +12,11 @@ export default function Posts({ userPosts }) {
         <div>
           {userPosts && userPosts.length > 0 ? (
             userPosts.map((post) => (
-              <div className="dashPost" key={post.id}>
+              <div
+                onClick={() => handleClick(post.id)}
+                className="dashPost"
+                key={post.id}
+              >
                 <p>
                   <b>{post.title}</b>
                 </p>
