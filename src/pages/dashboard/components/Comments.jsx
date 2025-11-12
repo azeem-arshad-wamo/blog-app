@@ -1,6 +1,10 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Posts({ userComments }) {
+  const navigate = useNavigate();
+
   function handleClick(id) {
-    console.log(`Id: ${id}`);
+    navigate(`/posts/${id}`);
   }
 
   return (
@@ -13,9 +17,9 @@ export default function Posts({ userComments }) {
           {userComments && userComments.length > 0 ? (
             userComments.map((comment) => (
               <div
-                onClick={() => handleClick(comment.id)}
+                onClick={() => handleClick(comment.postId)}
                 className="dashComment"
-                key={comment.id}
+                key={`${comment.postId}-${comment.id}`}
               >
                 <div>
                   <p>

@@ -15,7 +15,7 @@ export default function Posts() {
   const { UserActivity, setUserActivity } = useContext(UserActivityContext);
   const { isLogged, setIsLogged } = useContext(LoginContext);
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
-  const [Comments, setComments] = useState(null);
+  const [Comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const validationSchema = Yup.object({
@@ -35,32 +35,53 @@ export default function Posts() {
   });
 
   function handleCommentSubmit(values) {
-    console.log(`Comment: ${values.comment}`);
+    if (!posts) return;
 
-    let updated = [...Comments];
+    let commentText = values.comment.trim();
+    if (!commentText) return;
 
-    let newId = updated[updated.length - 1];
-    newId = newId.id + 1;
+    const lastId =
+      Comments && Comments.length > 0
+        ? Number(Comments[Comments.length - 1].id)
+        : 0;
+    const newId = lastId + 1;
 
     const newEntry = {
       id: newId,
       postId: post.id,
-      name: currentUser.username,
-      email: currentUser.email,
-      body: values.comment,
+      name: currentUser.username ? currentUser.username : "Anonymous",
+      email: currentUser.email ? currentUser.email : "Anonymous",
+      body: commentText,
     };
 
-    UserActivity.comments.push(newEntry);
-    console.log(UserActivity);
+    const updatedComments = [...Comments, newEntry];
+    setComments(updatedComments);
 
-    updated = [...updated, newEntry];
-    setComments(updated);
+    setUserActivity((prev) => ({
+      ...prev,
+      comments: [...prev.comments, newEntry],
+    }));
+
+    formik.resetForm();
   }
 
   useEffect(() => {
     if (id > 100) {
       const current = posts.find((now) => now.id == id);
       setPost(current);
+
+      const localComments =
+        UserActivity.comments.filter((c) => c.postId == id) || [];
+
+      const storedComments =
+        current && current.comments ? current.comments : [];
+
+      const merged = [...storedComments, ...localComments].filter(
+        (comment, index, self) =>
+          index === self.findIndex((c) => c.id === comment.id)
+      );
+
+      setComments(merged);
       setLoading(false);
     } else {
       async function getData() {
@@ -74,18 +95,29 @@ export default function Posts() {
           `https://jsonplaceholder.typicode.com/posts/${id}/comments`
         );
         const secondData = await secondResponse.json();
-        setComments(secondData);
+
+        const localComments =
+          UserActivity.comments.filter((entry) => entry.postId == id) || [];
+
+        setComments([...secondData, ...localComments]);
 
         setLoading(false);
       }
       getData();
     }
-  }, [id]);
+  }, [id, posts, UserActivity]);
 
   if (loading) {
     return (
       <>
         <h1>Loading....</h1>
+      </>
+    );
+  } else if (!post) {
+    return (
+      <>
+        <h1>Post not found</h1>
+        <p>It may not exist in the current session anymore</p>
       </>
     );
   } else {

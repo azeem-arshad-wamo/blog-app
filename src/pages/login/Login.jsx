@@ -37,7 +37,6 @@ export default function Login() {
   function handleLogIn(values) {
     const { email, password } = values;
 
-    console.log(userInfo);
     const existing = userInfo.find((user) => user.email === email);
     if (!existing) {
       console.log("Errror. No find email.");
